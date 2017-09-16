@@ -24,9 +24,9 @@ function t($msg)
     }
 
     // getting the language variable
-    if ($_COOKIE['lang'] == 'hu') $langId = 0;
-    if ($_COOKIE['lang'] == 'de') $langId = 1;
-    if ($_COOKIE['lang'] == 'en') $langId = 2;
+    if ($GLOBALS['lang'] == 'hu') $langId = 0;
+    if ($GLOBALS['lang'] == 'de') $langId = 1;
+    if ($GLOBALS['lang'] == 'en') $langId = 2;
 
     // print out the messages
     if (array_key_exists($msg, $translations)) {
@@ -36,5 +36,3 @@ function t($msg)
     }
 
 }
-
-?>

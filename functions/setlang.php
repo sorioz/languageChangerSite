@@ -72,6 +72,10 @@ $languages = array(
     'de'
 );
 /**
+ * @var string the language found in the URL
+ */
+$language = '';
+/**
  * Maps countries to languages.
  *
  * @var string[] $countryMap
@@ -107,6 +111,7 @@ $url = explode('/', $_SERVER['REQUEST_URI']);
 if (isset($url[1]) && in_array($url[1], $languages)) {
     setcookie('lang', $url[1], time() + 365 * 24 * 3600, '/');
     $finished = true;
+    $language = $url[1];
 }
 /**
  * Check bots. Bots always get the default language in order to avoid language confusion.
@@ -187,13 +192,11 @@ if (!$finished) {
  * If no language was found, serve the page. Otherwise redirect to the language and save a cookie.
  */
 if (!$foundLanguage) {
-    require('index.php');
+    return $language;
 } else {
-    echo $foundLanguage;
     header('HTTP/1.1 301 Moved Permanently', true, 301);
     header('Location: http://' . $_SERVER['HTTP_HOST'] . '/' .
         $foundLanguage . $_SERVER['REQUEST_URI']);
     setcookie('lang', $foundLanguage, time() + 365 * 24 * 3600, '/');
+    exit;
 }
-
-?>
