@@ -1,5 +1,5 @@
 <?php
-$filename = $_SESSION['page'];
+$filename = $GLOBALS['page'];
 if ($filename == "expertdentNew") {
     $filename = "index";
 }
